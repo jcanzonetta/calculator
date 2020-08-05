@@ -1,3 +1,5 @@
+
+
 #calculator-container{
     background-color: rgba(168, 227, 250, 0.541);
     place-items: center;
@@ -5,18 +7,26 @@
 
 #field-container{
     box-sizing: content-box;
-    border: solid black;
-    display: grid;
-    place-items: center;
+    border: 0.1em solid black;
+    background-color: aliceblue;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    min-height: 25px;
     height: 10vh;
+    max-height: 16.5vh;
 }
 
-#buttons-container{
+#all-buttons-container{
     display: grid;
     gap: 1rem;
     place-items: center;
-    grid-template-rows: repeat(5, minmax(25px, 15vh));
+    grid-template-rows: repeat(5, minmax(25px, 16vh));
     grid-template-columns: repeat(4, minmax(25px, 25vw));
+}
+
+.button-container{
+    border: 0.1em solid black;
 }
 
 button{
