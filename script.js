@@ -2,6 +2,7 @@ const resultField = document.querySelector("#result-field")
 const numButtons = document.querySelectorAll(".numButton")
 const operateButtons = document.querySelectorAll(".operateButton")
 const equateButton = document.querySelector("#equate-button")
+const clearButton = document.querySelector('#AC-button')
 let currentNumber = ""
 let savedNumber;
 let pendingCal = false;
@@ -11,7 +12,7 @@ let prevOperator;
 // Number Button Event Listeners
 numButtons.forEach(button => {
     button.addEventListener('click', () => {
-        currentNumber = button.innerHTML
+        currentNumber += button.innerHTML
         resultField.innerHTML = currentNumber
     })
 })
@@ -39,7 +40,13 @@ equateButton.addEventListener('click', () =>{
     resultField.innerHTML = operate(operator, savedNumber, currentNumber)
 })
 
-
+// Clears the calculator 
+clearButton.addEventListener('click', () =>{
+    pendingCal = false
+    operator = "clear"
+    currentNumber = ""
+    resultField.innerHTML = 0
+})
 
 
 function operate(operator, a, b){
@@ -48,9 +55,6 @@ function operate(operator, a, b){
     
     switch (operator){
         case "+":
-            console.log(`savedNumber: ${a}`)
-            console.log(`currentNumber: ${b}`)
-            console.log(`computation: ${add(a, b)}`)
             return add(a, b)
             break
         case "-":
@@ -77,9 +81,9 @@ function subtract(a,b) {
 }
     
 function multiply(a,b) {
-    return a*b
+    return a * b
 }
 
 function divide(a,b){
-    return a/b
+    return a / b
 }
