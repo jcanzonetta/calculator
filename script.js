@@ -2,30 +2,41 @@ const resultField = document.querySelector("#result-field")
 const numButtons = document.querySelectorAll(".numButton")
 const operateButtons = document.querySelectorAll(".operateButton")
 const equateButton = document.querySelector("#equate-button")
-let displayedNumber = ""
+let currentNumber = ""
 let savedNumber;
+let pendingCal = false;
 let operator;
+let prevOperator;
 
 // Number Button Event Listeners
 numButtons.forEach(button => {
     button.addEventListener('click', () => {
-        displayedNumber += button.innerHTML
-        resultField.innerHTML = displayedNumber
+        currentNumber = button.innerHTML
+        resultField.innerHTML = currentNumber
     })
 })
 
 //  Operator Button Event Listeners
 operateButtons.forEach(button => {
     button.addEventListener('click', () => {
+        prevOperator = operator
         operator = button.innerHTML
-        savedNumber = displayedNumber
-        displayedNumber = ""
+
+        if(!pendingCal){
+            savedNumber = currentNumber
+            currentNumber = ""
+            pendingCal = true
+        } else{
+            currentNumber = operate(prevOperator, savedNumber, currentNumber)
+            resultField.innerHTML = currentNumber
+            savedNumber = currentNumber;
+        }
     })
 })
 
 // Operate/Equals Event listener
 equateButton.addEventListener('click', () =>{
-    resultField.innerHTML = operate(operator, savedNumber, displayedNumber)
+    resultField.innerHTML = operate(operator, savedNumber, currentNumber)
 })
 
 
@@ -38,7 +49,7 @@ function operate(operator, a, b){
     switch (operator){
         case "+":
             console.log(`savedNumber: ${a}`)
-            console.log(`displayedNumber: ${b}`)
+            console.log(`currentNumber: ${b}`)
             console.log(`computation: ${add(a, b)}`)
             return add(a, b)
             break
