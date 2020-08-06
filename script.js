@@ -1,50 +1,63 @@
-const resultField = document.querySelector("#result-field")
+const topField = document.querySelector('#top-display')
+const resultField = document.querySelector("#result-display")
 const numButtons = document.querySelectorAll(".numButton")
 const operateButtons = document.querySelectorAll(".operateButton")
 const equateButton = document.querySelector("#equate-button")
 const clearButton = document.querySelector('#AC-button')
-let currentNumber = ""
-let savedNumber;
+let bNumber = ""
+let typedNumber = ""
+let aNumber;
 let pendingCal = false;
 let operator;
 let prevOperator;
+let cachedNumber;
 
 // Number Button Event Listeners
 numButtons.forEach(button => {
     button.addEventListener('click', () => {
-        currentNumber += button.innerHTML
-        resultField.innerHTML = currentNumber
+        typedNumber += button.innerHTML
+        resultField.innerHTML = typedNumber
     })
 })
 
 //  Operator Button Event Listeners
 operateButtons.forEach(button => {
     button.addEventListener('click', () => {
-        prevOperator = operator
+        prevOperator = operator // Might be able to do a check for this.
         operator = button.innerHTML
+        bNumber = typedNumber
 
         if(!pendingCal){
-            savedNumber = currentNumber
-            currentNumber = ""
+            topField.innerHTML = `${bNumber} ${operator}`
+            aNumber = bNumber
             pendingCal = true
         } else{
-            currentNumber = operate(prevOperator, savedNumber, currentNumber)
-            resultField.innerHTML = currentNumber
-            savedNumber = currentNumber;
+            topField.innerHTML = `${aNumber} ${prevOperator} ${bNumber}`
+            aNumber = operate(prevOperator, aNumber, bNumber)
+            resultField.innerHTML = aNumber
         }
+
+        typedNumber = ""
+        
     })
 })
 
 // Operate/Equals Event listener
 equateButton.addEventListener('click', () =>{
-    resultField.innerHTML = operate(operator, savedNumber, currentNumber)
+    if(pendingCal){
+        bNumber = typedNumber
+    }
+    resultField.innerHTML = operate(operator, aNumber, bNumber)
+    topField.innerHTML = `${aNumber} ${operator} ${bNumber}`
 })
 
 // Clears the calculator 
 clearButton.addEventListener('click', () =>{
     pendingCal = false
     operator = "clear"
-    currentNumber = ""
+    bNumber = ""
+    typedNumber = ""
+    topField.innerHTML = ""
     resultField.innerHTML = 0
 })
 
