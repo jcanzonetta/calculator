@@ -73,11 +73,3 @@ button{
     animation-duration: 0.5s;
     animation-timing-function: ease-in;
 }
-
-/* .updateIn{
-    background-color: rgba(168, 206, 250, 0.801);
-}
-
-.updateOut{
-    transition-duration: 2s;
-} */

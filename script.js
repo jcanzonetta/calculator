@@ -89,10 +89,11 @@ clearButton.addEventListener('click', () =>{
     displayAnimation();
 })
 
-//  Some magic and the keyframes animatikon will trigger again
+
 function displayAnimation(){
     display.classList.remove('displayChanged')
     
+    //  Some magic and the keyframes animatikon will trigger again
     void display.offsetWidth;
 
     display.classList.add("displayChanged")
@@ -114,20 +115,25 @@ function operate(operator, a, b){
     
     switch (operator){
         case "+":
-            return add(a, b)
+            return round(add(a, b))
             break
         case "-":
-            return subtract(a,b)
+            return round(subtract(a,b))
             break
         case "÷":
-            return divide(a,b )
+            return round(divide(a,b ))
             break
         case "x":
-            return multiply(a, b)
+            return round(multiply(a, b))
             break
         default:
             console.error(`Operate function failed with operator: ${operator}`)
     }
+}
+
+// Prevents rounding errors with float
+function round(num){
+    return Number(Math.round(num + 'e' + 14) + 'e-' + 14);
 }
 
 // Operator Functions
