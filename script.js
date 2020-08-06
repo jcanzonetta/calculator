@@ -66,8 +66,8 @@ clearButton.addEventListener('click', () =>{
 
 
 function operate(operator, a, b){
-    a = parseInt(a)
-    b = parseInt(b)
+    a = parseFloat(a)
+    b = parseFloat(b)
     
     switch (operator){
         case "+":
