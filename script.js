@@ -4,6 +4,8 @@ const numButtons = document.querySelectorAll(".numButton")
 const operateButtons = document.querySelectorAll(".operateButton")
 const equateButton = document.querySelector("#equate-button")
 const clearButton = document.querySelector('#AC-button')
+const decButton = document.querySelector('#dec-button')
+
 let bNumber = ""
 let typedNumber = ""
 let aNumber;
@@ -12,9 +14,19 @@ let operator;
 let prevOperator;
 let calculatedNumber;
 
+function decCheck(button){
+    if((typedNumber + button.innerHTML).indexOf(".") > -1){
+        decButton.disabled = true
+    }else{
+        decButton.disabled = false
+    }
+}
+
 // Number Button Event Listeners
 numButtons.forEach(button => {
     button.addEventListener('click', () => {
+        decCheck(button)
+        
         typedNumber += button.innerHTML
         resultField.innerHTML = typedNumber
     })
@@ -65,6 +77,7 @@ clearButton.addEventListener('click', () =>{
 })
 
 
+// Determines the operation function
 function operate(operator, a, b){
     a = parseFloat(a)
     b = parseFloat(b)
