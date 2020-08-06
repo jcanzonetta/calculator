@@ -10,7 +10,7 @@ let aNumber;
 let pendingCal = false;
 let operator;
 let prevOperator;
-let cachedNumber;
+let calculatedNumber;
 
 // Number Button Event Listeners
 numButtons.forEach(button => {
@@ -33,8 +33,9 @@ operateButtons.forEach(button => {
             pendingCal = true
         } else{
             topField.innerHTML = `${aNumber} ${prevOperator} ${bNumber}`
-            aNumber = operate(prevOperator, aNumber, bNumber)
-            resultField.innerHTML = aNumber
+            aNumber = operate(prevOperator, aNumber, bNumber) // Don't like this and the next couple of lines, but afraid of breaking the operations
+            calculatedNumber = aNumber
+            resultField.innerHTML = calculatedNumber
         }
 
         typedNumber = ""
@@ -47,7 +48,8 @@ equateButton.addEventListener('click', () =>{
     if(pendingCal){
         bNumber = typedNumber
     }
-    resultField.innerHTML = operate(operator, aNumber, bNumber)
+    calculatedNumber = operate(operator, aNumber, bNumber)
+    resultField.innerHTML = calculatedNumber
     topField.innerHTML = `${aNumber} ${operator} ${bNumber}`
 })
 
@@ -59,6 +61,7 @@ clearButton.addEventListener('click', () =>{
     typedNumber = ""
     topField.innerHTML = ""
     resultField.innerHTML = 0
+    calculatedNumber = ""
 })
 
 
