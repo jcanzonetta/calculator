@@ -49,3 +49,35 @@ button{
     background-image: linear-gradient(45deg, #474747 25%, #4a4a4a 25%, #4a4a4a 50%, #474747 50%, #474747 75%, #4a4a4a 75%, #4a4a4a 100%);
     background-size: 56.57px 56.57px;
 }
+
+/* Animation CSS */
+
+/* Gradual color change */
+.moused{
+    background-color: rgba(168, 227, 250, 1);
+    scale: 1.15;
+    cursor: pointer;
+    transition-duration: 0.3s;
+}
+
+/* Similar to .hit, but colors only */
+@keyframes fieldUpdate{
+    0% {}
+    50% {background-color: rgba(168, 206, 250, 0.801);}
+    100% {}
+}
+
+.displayChanged{
+    animation-name: fieldUpdate;
+    animation-iteration-count: 1;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-in;
+}
+
+/* .updateIn{
+    background-color: rgba(168, 206, 250, 0.801);
+}
+
+.updateOut{
+    transition-duration: 2s;
+} */
