@@ -3,24 +3,29 @@
     place-items: center;
 }
 
-#field-container{
+#display-container{
     box-sizing: content-box;
     border: 0.1em solid black;
     background-color: aliceblue;
     display: grid;
-    grid-template-rows: repeat(2, minmax(25px, 5vh));
+    grid-template-rows: repeat(2, minmax(25px, 6vh));
 }
 
-#top-field{
+.display{
+    align-self: center;
+    justify-self: end;
+    margin-right: 10px;
+}
+
+#prev-display{
     grid-column: 2 / 3;
     grid-row: 1 / 2;
-    justify-self: end;
 }
 
-#result-field{
+#result-display{
     grid-column: 2 / 3;
     grid-row: 2 / 3;
-    justify-self: end;
+    font-size: 1.25em;
 }
 
 #all-buttons-container{
